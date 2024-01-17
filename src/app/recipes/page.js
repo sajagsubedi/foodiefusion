@@ -1,9 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { actionCreators } from "@/state/index";
-import { bindActionCreators } from "redux";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { fetchRecipes, fetchMoreRecipes } from "@/redux/slices/fetchSlice"
 import { RecipeItem, SortMenu, Spinner } from "@/components";
 import { SortToggleContainer, SortToggleBtn } from "@/styles/ComponentStyles";
 
@@ -31,11 +30,7 @@ export default function Page() {
   });
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const { fetchRecipes, addmoreRecipes, fetchMoreRecipes } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
-  const [isSortMenuActive, setIsSortMenuActive] = useState(false);
+const [isSortMenuActive, setIsSortMenuActive] = useState(false);
   const changePrevSortFilter = (newsortFilter) => {
     setPrevSortFilter(newsortFilter);
   };

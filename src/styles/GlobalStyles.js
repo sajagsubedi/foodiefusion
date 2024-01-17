@@ -216,7 +216,6 @@ a{
 }
 .heroImgHalf {
   width: 46%;
-  background:red;
 }
 .hero img {
   width: 100%;
