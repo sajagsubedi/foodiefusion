@@ -1,7 +1,7 @@
 import { Hero, RecipeItem } from "@/components";
 import { Link } from "next/link";
 import { RecipeCarousel } from "@/styles/ComponentStyles";
-async function Home() {
+export default async function Home() {
   let url =
     "https://api.spoonacular.com/recipes/random?apiKey=3ca61df6115c4e5a88ff46ef66e7d657&number=10";
   let trendingRecipes = await fetch(url);
@@ -50,4 +50,4 @@ async function Home() {
   );
 }
 
-export default Home;
+

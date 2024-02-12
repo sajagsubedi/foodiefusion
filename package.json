@@ -9,9 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/swc-android-arm-eabi": "^13.2.4",
     "@reduxjs/toolkit": "^2.0.1",
-    "next": "14.0.4",
+    "force": "^0.0.3",
+    "next": "^13.5.2",
     "react": "^18",
     "react-dom": "^18",
     "react-infinite-scroll-component": "^6.1.0",
@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "eslint": "^8",
-    "eslint-config-next": "14.0.4"
+    "eslint-config-next": "13.5.6"
   }
 }

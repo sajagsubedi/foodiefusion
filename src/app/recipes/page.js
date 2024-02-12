@@ -9,31 +9,9 @@ import { SortToggleContainer, SortToggleBtn } from "@/styles/ComponentStyles";
 export default function Page() {
   const recipes = useSelector((state) => state.recipes);
   const sortfilter = useSelector((state) => state.sortfilter);
-  const [prevSortFilter, setPrevSortFilter] = useState({
-    isquery: false,
-    isAction: false,
-    searchQuery: "",
-    selectFilters: [
-      {
-        active: false,
-        selectedOpt: "",
-      },
-      {
-        active: false,
-        selectedOpt: "",
-      },
-      {
-        active: false,
-        selectedOpt: "",
-      },
-    ],
-  });
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 const [isSortMenuActive, setIsSortMenuActive] = useState(false);
-  const changePrevSortFilter = (newsortFilter) => {
-    setPrevSortFilter(newsortFilter);
-  };
   const toggleSort = () => {
     setIsSortMenuActive((prev) => !prev);
   };
@@ -42,8 +20,8 @@ const [isSortMenuActive, setIsSortMenuActive] = useState(false);
   };
   useEffect(() => {
     setLoading(true);
-    if (recipes.recipes.length === 0) {
-      fetchRecipes();
+    if (recipes.recipes.length == 0) {   
+      dispatch(fetchRecipes())
     }
     setLoading(false);
   }, []);
@@ -75,32 +53,29 @@ const [isSortMenuActive, setIsSortMenuActive] = useState(false);
       </SortToggleContainer>
 
       {loading && <Spinner />}
-      <InfiniteScroll
+      {!loading && recipes.recipes.length===0 && (<h3 className="noRecipe">No recipes found!</h3>)}
+     {recipes.recipes.length!==0 &&<InfiniteScroll
         dataLength={recipes.recipes.length}
         className="recipeGroup"
-        next={() =>
-          fetchMoreRecipes({
+        next={() =>dispatch(fetchMoreRecipes({
             offset: recipes.offset,
-            number: recipes.number,
             url: recipes.url,
-            sortfilter: prevSortFilter,
-          })
+            sortfilter: sortfilter,
+          }))
         }
-        hasMore={recipes.recipes.length !== recipes.totalResults}
+        hasMore={recipes.recipes.length !==recipes.totalResults}
         loader={validateSpinner()}
       >
         {!loading &&
           recipes.recipes.map((data, i) => {
             return <RecipeItem key={i} data={data} />;
           })}
-      </InfiniteScroll>
+      </InfiniteScroll>}
       <SortMenu
         state={{
           isSortMenuActive,
           toggleSort,
           changeLoading,
-          prevSortFilter,
-          changePrevSortFilter,
         }}
       />
     </section>

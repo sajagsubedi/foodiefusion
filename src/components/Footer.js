@@ -8,7 +8,7 @@ export default function Footer() {
             <h2 className="appName">Foodie Fusion</h2>
           </a>
           <p className="footerText">
-            et eiusmod veniam nisi tempor qui fugiat veniam aute proident
+          Get all kinds of recipes
           </p>
         </div>
         <ul className="categories">

@@ -76,10 +76,8 @@ a{
   top: 0;
   gap: 5vw;
   overflow: hidden;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4);
-}
-.sticky {
-  background-color: rgb(243, 244, 246);
+  background-color: var(--focusColor);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
 }
 .Navbar .navFirsthalf {
   width: 30%;
@@ -93,11 +91,8 @@ a{
   justify-content: center;
   align-items: center;
   gap: 6px;
-  color: var(--focusColor);
+  color:white;
   text-decoration: none;
-}
-.sticky .logoBx a {
-  color: var(--focusColor) !important;
 }
 .logoBx .logo {
   width: 40px;
@@ -147,15 +142,6 @@ a{
   box-shadow: 0 0 white;
   background: white;
 }
-.sticky .menuToggle::after,
-.sticky .menuToggle::before,
-.sticky.active .menuToggle::before,
-.sticky.active .menuToggle::after {
-  background: var(--text-color);
-}
-.sticky .menuToggle::before {
-  box-shadow: 0 10px var(--text-color);
-}
 .Navbar .menu {
   display: flex;
   justify-content: space-around;
@@ -169,17 +155,13 @@ a{
 }
 
 .Navbar .menu li a {
-  color: var(--text-color);
+  color: white;
   padding: 5px;
   text-decoration: none;
 }
 .Navbar .menu li a:hover {
   border-bottom: 2px solid white;
   color: white;
-}
-.Navbar.sticky .menu li a:hover {
-  border-bottom: 2px solid rgb(251, 191, 36);
-  color: rgba(251, 191, 36, 1) !important;
 }
 .hero {
   min-height: calc(100vh - 60px);
@@ -279,6 +261,9 @@ a{
 .footer .logoBx {
   width: 40%;
 }
+.footer .logoBx a{
+  color:var(--focusColor);
+}
 .footer .footerText {
   text-align: center;
   color: #3c3e41 !important;
@@ -338,9 +323,6 @@ a{
     overflow: visible;
     background: var(--focusColor);
   }
-  .sticky {
-    background: rgb(var(--primaryColor));
-  }
   .Navbar .navFirsthalf {
     width: 100%;
     justify-content: space-between;
@@ -351,9 +333,6 @@ a{
   }
   .Navbar .logoBx a {
     color: white !important;
-  }
-  .Navbar.sticky .logoBx a {
-    color: var(--focusColor) !important;
   }
   .Navbar .menuToggle {
     display: flex;
@@ -374,9 +353,6 @@ a{
     border-radius: 15px;
     margin-right: 5px;
     box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
-  }
-  .sticky .menu {
-    background: rgb(var(--primaryColor));
   }
   .Navbar.active .menu {
     height: 40vh;
@@ -447,8 +423,12 @@ a{
 .recipeGroup {
   display: flex;
   margin: 20px;
-  flex-direction: column;
+  flex-wrap:wrap;
   gap: 20px;
-  align-items: center;
+  justify-content:space-around;
+}
+.noRecipe{
+  text-align:center;
+  margin:5px;
 }
 `;

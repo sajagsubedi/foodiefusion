@@ -1,60 +1,61 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
-  isAction: false,
-  fetchState: {
-    isquery: false,
-    searchQuery: '',
-    selectFilters: [
-      { active: false, selectedOpt: '' },
-      { active: false, selectedOpt: '' },
-      { active: false, selectedOpt: '' },
-    ],
-  },
-  currentState: {
-    isquery: false,
-    searchQuery: '',
-    selectFilters: [
-      { active: false, selectedOpt: '' },
-      { active: false, selectedOpt: '' },
-      { active: false, selectedOpt: '' },
-    ],
-  },
+    fetchState: {
+        isquery: false,
+        searchQuery: "",
+        selectFilters: [
+            { active: false, selectedOpt: "" },
+            { active: false, selectedOpt: "" },
+            { active: false, selectedOpt: "" }
+        ]
+    },
+    currentState: {
+        isquery: false,
+        searchQuery: "",
+        selectFilters: [
+            { active: false, selectedOpt: "" },
+            { active: false, selectedOpt: "" },
+            { active: false, selectedOpt: "" }
+        ]
+    }
 };
+export const setSortFilter = createAsyncThunk(
+    "sortfilter/setSortFilter",
+    payload => {
+        let rs = false;
+        for (let i = 0; i < 3; i++) {
+            if (
+                payload.currentState.selectFilters[i].selectedOpt !== "" ||
+                payload.currentState.searchQuery !== ""
+            ) {
+                rs = true;
+                break;
+            }
+        }
+        let newObj = { ...payload.currentState };
+        newObj.isquery = rs;
+        return newObj;
+    }
+);
 
 const changeFilterSlice = createSlice({
-  name: 'changeFilter',
-  initialState,
-  reducers: {
-    setSortFilter: (state, action) => {
-      const toComparePayload = {
-        ...action.payload.currentState,
-        isquery: false,
-      };
-
-      if (
-        JSON.stringify(toComparePayload) === JSON.stringify(initialState.currentState)
-      ) {
-        state = initialState;
-      } else {
-        state.currentState = { ...action.payload };
-        state.currentState.isquery = true;
-      }
+    name: "changeFilter",
+    initialState,
+    reducers: {
+        updateFetchState: (state, action) => {
+            state.fetchState = { ...state.currentState };
+        },
+        clearSortFilter: (state, action) => {
+            state.currentState = { ...initialState.currentState };
+        }
     },
-    clearSortFilter: (state, action) => {
-      const { currentState } = action.payload;
-
-      if (
-        JSON.stringify(currentState.selectFilters) !==
-          JSON.stringify(initialState.currentState.selectFilters) ||
-        currentState.searchQuery !== initialState.currentState.searchQuery
-      ) {
-        state.isAction = true;
-        state.currentState = { ...initialState.currentState };
-      }
-    },
-  },
+    extraReducers: builder => {
+        builder.addCase(setSortFilter.fulfilled, (state, action) => {
+            state.currentState = action.payload;
+        });
+    }
 });
 
-export const { setSortFilter, clearSortFilter } = changeFilterSlice.actions;
+export const { clearSortFilter, updateFetchState } = changeFilterSlice.actions;
 export default changeFilterSlice.reducer;
