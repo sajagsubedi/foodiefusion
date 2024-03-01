@@ -173,11 +173,6 @@ const SortMenu = ({ state }) => {
                     );
                 })}
 
-                <div className="ingridentSort">
-                    <h5>Add Ingridents available</h5>
-                </div>
-            </div>
-
             <div className="actionBtnContainer">
                 <button className="SecondaryBtn btn" onClick={handleClear}>
                     Clear
