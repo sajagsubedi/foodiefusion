@@ -172,6 +172,7 @@ const SortMenu = ({ state }) => {
                         </div>
                     );
                 })}
+            </div>
 
             <div className="actionBtnContainer">
                 <button className="SecondaryBtn btn" onClick={handleClear}>
